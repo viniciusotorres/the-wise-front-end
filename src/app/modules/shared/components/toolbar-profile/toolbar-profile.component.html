@@ -1,0 +1,29 @@
+@if (isLoggedIn()) {
+  <section class="flex items-center rounded-2xl">
+    <div
+      [ngClass]="{'legend-styles': userData.rank === 'Legend'}"
+      class="relative top-16 left-72 w-40 h-20 bg-gradient-to-r from-fuchsia-900 to-purple-800 rounded-b-full text-white text-2xl flex items-center justify-center"
+      [ngStyle]="userData.rank === 'Legend' ? {'top': '7rem', 'left': '18rem', 'width': '12rem', 'height':'12rem'}: {}">
+      <img
+        [src]="getRankImage()"
+        class="w-20"
+        [ngStyle]="userData.rank === 'Legend' ? {'width': '16rem', 'max-width': 'none'} : {}">
+    </div>
+    <div class="flex ml-2 items-center justify-center w-96">
+      <div class="flex flex-col items-center justify-center px-6 w-full">
+        <div class="flex justify-between w-full">
+          <p class="font-bold text-white text-sm">Lv.{{ userData.level }}</p>
+          <p class="font-bold text-white text-sm">{{ userData.rank }}</p>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-4 mb-2 relative">
+          <div class="absolute top-0 left-0 w-full h-full bg-gray-200 rounded-full"></div>
+          <div class="absolute top-0 left-0 h-full bg-green-500 rounded-full" [style.width.%]="progressPercentage"></div>
+          <span class="absolute inset-0 flex items-center justify-center text-white text-xp">{{ userData.xp }}/{{ userData.nextLevel }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="cursor-pointer text-white flex items-center" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+    </div>
+  </section>
+}
