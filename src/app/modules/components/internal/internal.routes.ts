@@ -7,6 +7,11 @@ const InternalRoutes: Routes = [
     path: 'inicio',
     loadComponent: () => import('./internal.component').then(m => m.InternalComponent),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'jogar',
+    loadComponent: () => import('./game/game/game.component').then(m => m.GameComponent),
+    canActivate: [AuthGuard]
   }
 ];
 

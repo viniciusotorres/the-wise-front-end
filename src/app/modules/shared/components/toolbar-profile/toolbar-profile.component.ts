@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthServiceService } from '../../../core/auth/auth-service.service';
+import { PlayerService } from '../../../core/services/player/player.service';
 import { MatIconModule } from "@angular/material/icon";
-import {CommonModule} from "@angular/common";
+import { CommonModule } from "@angular/common";
 
 /**
  * Component for displaying the toolbar profile.
@@ -26,26 +27,34 @@ export class ToolbarProfileComponent implements OnInit {
     { name: 'Master', image: 'https://i.pinimg.com/originals/c7/ff/71/c7ff7112fdb9138ddbb6990a24223826.png' },
     { name: 'Grandmaster', image: 'https://cdn-icons-png.flaticon.com/512/1092/1092254.png' },
     { name: 'Challenger', image: 'https://png.pngtree.com/png-vector/20220715/ourmid/pngtree-spartan-warrior-helmet-png-image_5968794.png' },
-    {name: 'Legend', image: 'https://cdn.pixabay.com/photo/2024/04/02/09/40/greek-8670466_1280.png'}
+    { name: 'Legend', image: 'https://cdn.pixabay.com/photo/2024/04/02/09/40/greek-8670466_1280.png' }
   ];
 
   /**
    * Constructor for ToolbarProfileComponent.
    * @param {AuthServiceService} authService - The authentication service.
+   * @param {PlayerService} playerService - The player service.
    */
-  constructor(private authService: AuthServiceService) {}
+  constructor(private authService: AuthServiceService, private playerService: PlayerService) {}
 
   /**
    * Initializes the component.
    */
   ngOnInit(): void {
-    if (this.isLoggedIn()) {
-      this.userData = this.authService.describeToken();
-      if (this.userData) {
-        this.calculateProgress();
+      const userId = this.authService.getUserId();
+      if (userId) {
+        this.playerService.getPlayer(userId).subscribe(
+          (data: any) => {
+            this.userData = data;
+            this.calculateProgress();
+            console.log(this.userData);
+          },
+          (error) => {
+            console.error('Erro ao obter dados do jogador:', error);
+          }
+        );
       }
-      console.log(this.userData);
-    }
+    
   }
 
   /**

@@ -13,5 +13,6 @@ export const routes: Routes = [
     path: 'interno',
     loadChildren: () => import('./modules/components/internal/internal.routes'),
     canActivate: [AuthGuard]
-  }
+  },
+  
 ];

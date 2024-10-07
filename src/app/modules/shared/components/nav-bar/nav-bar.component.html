@@ -2,7 +2,7 @@
   @if (isLoggedIn()){
   <div class="flex gap-8 items-center text-white">
     <p class="uppercase hover:text-black transition duration-500 cursor-pointer font-extrabold text-2xl">Inicio</p>
-    <p class="uppercase hover:text-black transition duration-500 cursor-pointer font-extrabold text-2xl">Jogar</p>
+    <p (click)="goToGame()" class="uppercase hover:text-black transition duration-500 cursor-pointer font-extrabold text-2xl">Jogar</p>
     <p class="uppercase hover:text-black transition duration-500 cursor-pointer font-extrabold text-2xl">Perfil</p>
     <p class="uppercase hover:text-black transition duration-500 cursor-pointer font-extrabold text-2xl">Chat</p>
   </div>
